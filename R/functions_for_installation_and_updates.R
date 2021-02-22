@@ -30,10 +30,14 @@ install_mrtool <- function() {
         "\nUse the update_mrtool() function to change the version"
     )
   } else {
+
     cmd1 <- paste0(py_current, " -m pip install --user ")
     version_default <- "git+https://github.com/ihmeuw-msca/mrtool.git"
     cmd2 <- paste0(cmd1, version_default)
     system(cmd2)
+    if (!reticulate::py_module_available("dataclasses")) {
+      reticulate::conda_install("dataclasses")
+    }
 
     warning(paste0(
       "To use the newly downloaded 'mrtool' module, ", "please restart the R session and re-load this package"
