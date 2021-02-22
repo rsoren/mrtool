@@ -36,7 +36,7 @@ install_mrtool <- function() {
     cmd2 <- paste0(cmd1, version_default)
     system(cmd2)
     if (!reticulate::py_module_available("dataclasses")) {
-      reticulate::conda_install("dataclasses")
+      reticulate::conda_install(packages = "dataclasses")
     }
 
     warning(paste0(
