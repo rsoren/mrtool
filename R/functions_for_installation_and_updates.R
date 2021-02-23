@@ -39,7 +39,6 @@ install_mrtool <- function() {
       py_config()$python, " -m pip install --user ",
       "git+https://github.com/ihmeuw-msca/mrtool.git"
     )
-    cmd_mrtool <- paste0(cmd1, version_default)
     system(cmd_mrtool)
 
     require(reticulate)
