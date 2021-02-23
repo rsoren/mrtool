@@ -31,13 +31,26 @@ install_mrtool <- function() {
     )
   } else {
 
-    cmd1 <- paste0(py_current, " -m pip install --user ")
-    version_default <- "git+https://github.com/ihmeuw-msca/mrtool.git"
+    # install libgmp3-dev
+    system("sudo apt-get -y install libgmp3-dev")
+
+    # install mrtool
+    cmd_mrtool <- paste0(
+      py_config()$python, " -m pip install --user ",
+      "git+https://github.com/ihmeuw-msca/mrtool.git"
+    )
     cmd2 <- paste0(cmd1, version_default)
     system(cmd2)
-    if (!reticulate::py_module_available("dataclasses")) {
-      reticulate::conda_install(packages = "dataclasses")
-    }
+
+    if (!py_module_available("dataclasses")) conda_install(packages = "dataclasses")
+    if (!py_module_available("cyipopt")) conda_install(packages = "cyipopt", forge = TRUE)
+    if (!py_module_available("pycddlib")) py_install(packages = "pycddlib", pip = TRUE)
+
+    cmd_limetr <- paste0(
+      py_config()$python, " -m pip install --user ",
+      "git+https://github.com/zhengp0/limetr.git@master"
+    )
+    system(cmd_limetr)
 
     warning(paste0(
       "To use the newly downloaded 'mrtool' module, ", "please restart the R session and re-load this package"
@@ -46,7 +59,7 @@ install_mrtool <- function() {
 }
 
 
-update_mrtool <- function(module_location = "git+https://github.com/ihmeuw-msca/mrtool.git#egg=mrtool") {
+update_mrtool <- function(module_location = "git+https://github.com/ihmeuw-msca/mrtool.git@v0.0.1#egg=mrtool") {
 
   if (file.exists("/ihme/code/mscm/miniconda3/bin/conda")) {
     stop("Custom updates of 'mrtool' on the IHME cluster are not permitted")
