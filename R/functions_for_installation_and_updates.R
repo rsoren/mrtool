@@ -39,8 +39,8 @@ install_mrtool <- function() {
       py_config()$python, " -m pip install --user ",
       "git+https://github.com/ihmeuw-msca/mrtool.git"
     )
-    cmd2 <- paste0(cmd1, version_default)
-    system(cmd2)
+    cmd_mrtool <- paste0(cmd1, version_default)
+    system(cmd_mrtool)
 
     require(reticulate)
     if (!py_module_available("dataclasses")) conda_install(packages = "dataclasses")
