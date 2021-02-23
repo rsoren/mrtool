@@ -42,6 +42,7 @@ install_mrtool <- function() {
     cmd2 <- paste0(cmd1, version_default)
     system(cmd2)
 
+    require(reticulate)
     if (!py_module_available("dataclasses")) conda_install(packages = "dataclasses")
     if (!py_module_available("cyipopt")) conda_install(packages = "cyipopt", forge = TRUE)
     if (!py_module_available("pycddlib")) py_install(packages = "pycddlib", pip = TRUE)
