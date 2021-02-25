@@ -70,3 +70,6 @@ dat_pred1$load_df(
   data = df_pred1,
   col_covs=list('x1')
 )
+
+
+

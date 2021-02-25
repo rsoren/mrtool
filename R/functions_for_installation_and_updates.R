@@ -32,12 +32,12 @@ install_mrtool <- function() {
   } else {
 
     # install libgmp3-dev
-    system("sudo apt-get -y install libgmp3-dev")
+    # system("sudo apt-get -y install libgmp3-dev")
 
     # install mrtool
     cmd_mrtool <- paste0(
       py_config()$python, " -m pip install --user ",
-      "git+https://github.com/ihmeuw-msca/mrtool.git"
+      "git+https://github.com/ihmeuw-msca/mrtool.git@v0.0.1#egg=mrtool"
     )
     system(cmd_mrtool)
 
