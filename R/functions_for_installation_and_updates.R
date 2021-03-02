@@ -32,7 +32,7 @@ install_mrtool <- function() {
   } else {
 
     # install libgmp3-dev
-    # system("sudo apt-get -y install libgmp3-dev")
+    system("sudo apt-get -y install libgmp3-dev")
 
     # install mrtool
     cmd_mrtool <- paste0(
